@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Java Aggregation & Composition</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="navbar">
+      <a href="#home" class="logo">JAVA<span>.</span>CONCEPTS</a>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#aggregation">Aggregation</a>
+        <a href="#composition">Composition</a>
+        <a href="#comparison">Comparison</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <p class="eyebrow">OBJECT-ORIENTED PROGRAMMING</p>
+          <h1>Understanding<br />Object Relationships<span>.</span></h1>
+          <p class="hero-text">
+            Explore Aggregation and Composition in Java. Learn how objects
+            connect through real-world examples and simple Java programs.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#aggregation">Explore Concepts ↗</a>
+            <a class="btn secondary" href="#comparison">Compare Both</a>
+          </div>
+          <div class="hero-note">
+            <span class="status-dot"></span>
+            Learn the relationship between objects
+          </div>
+        </div>
+
+        <div class="relationship-card">
+          <span class="card-label">OBJECT RELATIONSHIPS / 01</span>
+          <div class="object-box">Department</div>
+          <div class="connector"><span>has a</span></div>
+          <div class="object-box child">Teacher</div>
+          <p class="diagram-caption">Aggregation · Independent lifecycle</p>
+          <div class="diagram-divider"></div>
+          <div class="object-box">House</div>
+          <div class="connector strong"><span>owns</span></div>
+          <div class="object-box child copper-box">Room</div>
+          <p class="diagram-caption">Composition · Dependent lifecycle</p>
+        </div>
+      </section>
+
+      <section class="intro section-pad">
+        <p class="eyebrow">THE FOUNDATION</p>
+        <h2>One concept. Two relationships.</h2>
+        <p class="section-description">
+          Both aggregation and composition represent a HAS-A relationship. The
+          key difference is how strongly the contained object depends on the
+          object that contains it.
+        </p>
+
+        <div class="concept-grid">
+          <article class="concept-card aggregation-card">
+            <span class="number">01 / WEAK OWNERSHIP</span>
+            <div class="concept-icon">↗</div>
+            <h3>Aggregation</h3>
+            <p>
+              One object refers to another object, but the referenced object can
+              exist independently.
+            </p>
+            <a href="#aggregation">Explore aggregation →</a>
+          </article>
+
+          <article class="concept-card composition-card">
+            <span class="number">02 / STRONG OWNERSHIP</span>
+            <div class="concept-icon">◆</div>
+            <h3>Composition</h3>
+            <p>
+              One object owns or controls another object's lifecycle as part of
+              a whole.
+            </p>
+            <a href="#composition">Explore composition →</a>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="detail-section aggregation-section section-pad"
+        id="aggregation"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">CONCEPT 01</p>
+          <h2>Aggregation<span>.</span></h2>
+          <p>A HAS-A relationship with independent objects.</p>
+        </div>
+
+        <div class="detail-grid">
+          <div class="explanation">
+            <h3>What is Aggregation?</h3>
+            <p>
+              Aggregation is a special form of association in Java. One class
+              holds a reference to an object of another class, but that object
+              can exist independently of the containing object.
+            </p>
+            <h3>Real-world example</h3>
+            <p>
+              A Department has Teachers. If the Department is closed, a Teacher
+              can still exist and can work in another department.
+            </p>
+            <div class="fact-box">
+              <strong>Remember</strong>
+              <p>The contained object has an independent lifecycle.</p>
+            </div>
+            <h3>Key characteristics</h3>
+            <ul class="feature-list">
+              <li>Represents a HAS-A relationship.</li>
+              <li>Objects can have separate lifecycles.</li>
+              <li>
+                Commonly implemented using object references passed through
+                constructors or methods.
+              </li>
+              <li>Java has no special aggregation keyword.</li>
+            </ul>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-header">
+              <span>AggregationExample.java</span>
+              <button class="copy-btn" data-copy="aggregation-code">
+                Copy code
+              </button>
+            </div>
+            <pre><code id="aggregation-code">class Teacher {
+    String name;
+
+    Teacher(String name) {
+        this.name = name;
+    }
+
+    void display() {
+        System.out.println("Teacher: " + name);
+    }
+}
+
+class Department {
+    Teacher teacher;
+
+    Department(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    void show() {
+        System.out.println("Department has:");
+        teacher.display();
+    }
+}
+
+public class AggregationExample {
+    public static void main(String[] args) {
+        Teacher t = new Teacher("Ravi");
+        Department d = new Department(t);
+
+        d.show();
+        t.display();
+    }
+}</code></pre>
+            <div class="output-box">
+              <span>EXPECTED OUTPUT</span>
+              <pre>
+Department has:
+Teacher: Ravi
+Teacher: Ravi</pre
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="detail-section composition-section section-pad"
+        id="composition"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">CONCEPT 02</p>
+          <h2>Composition<span>.</span></h2>
+          <p>A HAS-A relationship with strong ownership.</p>
+        </div>
+
+        <div class="detail-grid">
+          <div class="explanation">
+            <h3>What is Composition?</h3>
+            <p>
+              Composition is a stronger form of association in which one object
+              is responsible for the lifecycle of another object that forms part
+              of it.
+            </p>
+            <h3>Real-world example</h3>
+            <p>
+              A House contains Rooms. In a typical composition model, the House
+              creates and owns its Room objects. Those rooms are treated as
+              parts of that particular House.
+            </p>
+            <div class="fact-box copper-fact">
+              <strong>Remember</strong>
+              <p>
+                The contained object's lifecycle is tied to its owner in the
+                modeled relationship.
+              </p>
+            </div>
+            <h3>Key characteristics</h3>
+            <ul class="feature-list">
+              <li>Represents strong ownership.</li>
+              <li>The whole controls the part's lifecycle by design.</li>
+              <li>
+                Often implemented by creating the part inside the owning class.
+              </li>
+              <li>Java has no special composition keyword.</li>
+            </ul>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-header">
+              <span>CompositionExample.java</span>
+              <button class="copy-btn" data-copy="composition-code">
+                Copy code
+              </button>
+            </div>
+            <pre><code id="composition-code">class Room {
+    void display() {
+        System.out.println("Room belongs to the house.");
+    }
+}
+
+class House {
+    private final Room room;
+
+    House() {
+        room = new Room();
+    }
+
+    void show() {
+        System.out.println("House contains:");
+        room.display();
+    }
+}
+
+public class CompositionExample {
+    public static void main(String[] args) {
+        House house = new House();
+        house.show();
+    }
+}</code></pre>
+            <div class="output-box">
+              <span>EXPECTED OUTPUT</span>
+              <pre>
+House contains:
+Room belongs to the house.</pre
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="comparison-section section-pad" id="comparison">
+        <p class="eyebrow">SIDE-BY-SIDE</p>
+        <h2>Aggregation vs Composition</h2>
+        <p class="section-description">
+          Understand the differences at a glance.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Aggregation</th>
+                <th>Composition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Relationship</td>
+                <td>Weak HAS-A</td>
+                <td>Strong HAS-A</td>
+              </tr>
+              <tr>
+                <td>Ownership</td>
+                <td>Weaker association</td>
+                <td>Strong ownership</td>
+              </tr>
+              <tr>
+                <td>Lifecycle</td>
+                <td>Objects can exist independently</td>
+                <td>Part's lifecycle is tied to the whole by design</td>
+              </tr>
+              <tr>
+                <td>Creation</td>
+                <td>Often receives an existing object</td>
+                <td>Often creates the part internally</td>
+              </tr>
+              <tr>
+                <td>Example</td>
+                <td>Department and Teacher</td>
+                <td>House and Room</td>
+              </tr>
+              <tr>
+                <td>Java keyword</td>
+                <td>No special keyword</td>
+                <td>No special keyword</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="interview-box">
+          <span class="interview-label">INTERVIEW TIP</span>
+          <h3>How do you explain the difference?</h3>
+          <p>
+            “Aggregation and composition are both HAS-A relationships. In
+            aggregation, the referenced object can exist independently. In
+            composition, the owning object controls the lifecycle of its part as
+            defined by the design.”
+          </p>
+        </div>
+      </section>
+
+      <section class="quiz-section section-pad" id="quiz">
+        <p class="eyebrow">TEST YOUR KNOWLEDGE</p>
+        <h2>Quick concept check</h2>
+        <div class="quiz-card">
+          <p class="question-count">QUESTION 01</p>
+          <h3>
+            A Department refers to a Teacher who can exist independently. Which
+            relationship is this?
+          </h3>
+          <div class="quiz-options">
+            <button class="quiz-option" data-answer="wrong">Composition</button>
+            <button class="quiz-option" data-answer="correct">
+              Aggregation
+            </button>
+            <button class="quiz-option" data-answer="wrong">Inheritance</button>
+          </div>
+          <p id="quiz-feedback" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a href="#home" class="logo">JAVA<span>.</span>CONCEPTS</a>
+      <p>Learn the concept. Understand the relationship. Write better Java.</p>
+      <a href="#home" class="back-top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>
